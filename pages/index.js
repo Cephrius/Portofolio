@@ -68,10 +68,10 @@ export default function Home() {
             <p className="text-md py-5 leading-8 text-gray-800 md:text-xl max-w-lg mx-auto dark:text-white">Current Computer Science student with the goal of becoming a software engineer, Future CEO of Cephrius Technologies</p>
           </div>
           <div className="text-6xl flex justify-center gap-16 py-10 text-gray-600 dark:text-white">
-            <ToolTip textSize="sm" tooltip={"Twitter"}><a href="https://twitter.com/CEhileme"><AiFillTwitterCircle /></a></ToolTip>
-            <ToolTip textSize="sm" tooltip={"Instagram"}><a href="https://www.instagram.com/chiedozie.py/" ><AiFillInstagram/> </a> </ToolTip>
-            <ToolTip textSize="sm" tooltip={"Linkedin"}  ><a href="https://www.linkedin.com/in/chiedozie-ehileme-529b6a25b/"><AiFillLinkedin /></a></ToolTip>
-            <ToolTip textSize="sm" tooltip={"GitHub"}  ><a href="https://github.com/Cephrius/"><AiFillGithub /></a></ToolTip>
+            <ToolTip textSize="lg" tooltip={"Twitter"}><a href="https://twitter.com/CEhileme"><AiFillTwitterCircle /></a></ToolTip>
+            <ToolTip textSize="lg" tooltip={"Instagram"}><a href="https://www.instagram.com/chiedozie.py/" ><AiFillInstagram/> </a> </ToolTip>
+            <ToolTip textSize="lg" tooltip={"Linkedin"}  ><a href="https://www.linkedin.com/in/chiedozie-ehileme-529b6a25b/"><AiFillLinkedin /></a></ToolTip>
+            <ToolTip textSize="lg" tooltip={"GitHub"}  ><a href="https://github.com/Cephrius/"><AiFillGithub /></a></ToolTip>
             
             
           </div>
