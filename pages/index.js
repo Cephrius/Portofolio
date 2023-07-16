@@ -22,6 +22,7 @@ import web5 from '../public/web5.png'
 import web6 from '../public/web6.png'
 import { useState, useEffect } from "react";
 import ToolTip from "./ToolTip";
+import DownloadButton from "./donwloadButton";
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -58,7 +59,7 @@ export default function Home() {
                   
                 </li>
                 <li>
-                  <a className=" bg bg-gradient-to-r from-blue-500 to to-blue-400 bg-blue-500 text-white px-10 py-2 rounded-lg ml-8 font-bold" href="#">Resume</a>
+                  <DownloadButton />
                   </li>
               </ul>
           </nav>
@@ -68,10 +69,10 @@ export default function Home() {
             <p className="text-md py-5 leading-8 text-gray-800 md:text-xl max-w-lg mx-auto dark:text-white">Current Computer Science student with the goal of becoming a software engineer, Future CEO of Cephrius Technologies</p>
           </div>
           <div className="text-6xl flex justify-center gap-16 py-10 text-gray-600 dark:text-white">
-            <ToolTip textSize="lg" tooltip={"Twitter"}><a href="https://twitter.com/CEhileme"><AiFillTwitterCircle /></a></ToolTip>
-            <ToolTip textSize="lg" tooltip={"Instagram"}><a href="https://www.instagram.com/chiedozie.py/" ><AiFillInstagram/> </a> </ToolTip>
-            <ToolTip textSize="lg" tooltip={"Linkedin"}  ><a href="https://www.linkedin.com/in/chiedozie-ehileme-529b6a25b/"><AiFillLinkedin /></a></ToolTip>
-            <ToolTip textSize="lg" tooltip={"GitHub"}  ><a href="https://github.com/Cephrius/"><AiFillGithub /></a></ToolTip>
+            <ToolTip textSize="lg" tooltip={"Twitter"}><a href="https://twitter.com/CEhileme" target="_blank" rel="noreferrer"><AiFillTwitterCircle /></a></ToolTip>
+            <ToolTip textSize="lg" tooltip={"Instagram"}><a href="https://www.instagram.com/chiedozie.py/" target="_blank" rel="noreferrer" ><AiFillInstagram/> </a> </ToolTip>
+            <ToolTip textSize="lg" tooltip={"Linkedin"}  ><a href="https://www.linkedin.com/in/chiedozie-ehileme-529b6a25b/" target="_blank" rel="noreferrer"><AiFillLinkedin /></a></ToolTip>
+            <ToolTip textSize="lg" tooltip={"GitHub"}  ><a href="https://github.com/Cephrius/" target="_blank" rel="noreferrer"><AiFillGithub /></a></ToolTip>
             
             
           </div>
