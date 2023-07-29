@@ -91,7 +91,7 @@ export default function Home() {
             <p className="relative text-md py-2 leading-9 text-gray-800 text-center lg:mx-auto dark:text-white"  >
             Hey there! Im Chiedozie, a Computer Science major hailing from Katy, Texas. Ever since I can remember, Ive had this burning passion for technology, especially when it comes to computers.
             Ive always been that kid who rocked it in the computer classes. Now, I want to take that passion to the next level and turn it into a full-blown career. So, I decided to dive into the exciting 
-            world of software engineering. Im starting off as a backend developer, but my ultimate goal is to become a full stack developer and land a gig at a cool corporate company. On the side, when Im not buried in coursework, Im working on some pretty awesome side projects. You should totally check them out on my GitHub link.
+            world of software engineering. Im planning to start off as a backend developer, but my ultimate goal is to work my way up to a full stack developer and land a postion at either a major Tech Company or a FAANG. On the side, when I'm not buried in coursework, Im working on some pretty awesome side projects. You should totally check them out on my <a className="font-bold" href="https://github.com/Cephrius/">GitHub Link.</a>
             
             <p className="text-base py-2 leading-8 text-gray-800 dark:text-white
             ">
