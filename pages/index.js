@@ -43,7 +43,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=0.65"/>
         <link rel="icon" href="logo.jpg" />
       </Head>
-      <main className="bg-white px-10 md:px-20 lg:px-14 dark:bg-gray-900 ">
+      <main className="bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900 "> {/* add fade in to dark mode feature */}
          <section className=" h-screen">
           <nav className="py-10 mb-12 flex justify-between">
           <ToolTip tooltip={"Chiedozie Ehileme"} >
@@ -51,10 +51,11 @@ export default function Home() {
           </ToolTip>
               <ul className="flex items-center">
                 <li>
-                  <ToolTip tooltip={"Toggle Dark Mode"} >
+                  <ToolTip tooltip={ darkMode ? "Toggle Light Mode": "Toggle Dark Mode"}  >
                     <BsFillMoonStarsFill  className="cursor-pointer text-xl dark:text-yellow-400" 
                   onClick={() => setDarkMode(!darkMode)}
-                    />
+                  
+                  />
                   </ToolTip>
                   
                   
