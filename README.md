@@ -35,6 +35,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Tools Used
 
+- JavaScript
 - Next.JS
 - React
 - Tailwind CSS
