@@ -102,7 +102,7 @@ export default function Home() {
             </p>
           </div>
           <div className="lg:flex justify-center gap-28">
-            <div className="text-center shadow-lg p-10 rounded-xl my-10 border-black border-10 " >
+            <div className="text-center shadow-2xl p-10 rounded-xl my-10 border-black border-10 transition-all duration-400 hover:scale-110" >
               <Image src={design} width={100} height={100}/>
               <h3 className="text-lg font-medium pt-8 pb-2 dark:text-white">Side Projects</h3>
               <p className="py-2 dark:text-white ">
@@ -120,7 +120,7 @@ export default function Home() {
               <p className="text-gray-800 py-1 dark:text-white">Spotify Style App</p>
 
             </div>
-            <div className="text-center shadow-lg p-10 rounded-xl my-10 border-black border-10 dark:text-white" >
+            <div className="text-center shadow-2xl p-10 rounded-xl my-10 border-black border-10 dark:text-white transition-all duration-300 hover:scale-110" >
               <Image src={code} width={100} height={100}/>
               <h3 className="text-lg font-medium pt-8 pb-2 dark:text-white">Tools and Programming Languages</h3>
               <p className="py-2 dark:text-white">
@@ -142,16 +142,17 @@ export default function Home() {
           </div>
          </section>
          <section>
-          <div>
+          <div className={darkMode ? "text-white":"text-gray-800"} >
             
-            <h3 className="text-3xl py-1 dark:text-white">Portofolio</h3>
-            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-800">
+            <h3 className="text-4xl py-1 text-center">Portofolio</h3>
+            <p className="text-md py-2 leading-8 text-center ">
               Here are some of the projects that Ive worked on.
             </p>
           </div>
-          <div className="flex flex-col gap-10 py-10 lg:flex-row lg:flex-wrap">
+        <div className=" container mx-auto w-screen pb-28">
+          <div className="snap-mandatory snap-x flex overflow-x-scroll w-full space-x-10 ">
 
-            <div className="basis-1/3 flex-1">
+            <div className="snap-center h-96 w-96  flex-shrink-0 transition-all duration-300 hover:scale-95">
               <Image src={web1} className="rounded-lg object-cover" 
                 width={'100%'} 
                 height={'100%'} 
@@ -159,39 +160,39 @@ export default function Home() {
                 />
             </div>
 
-            <div className="basis-1/3 flex-1">
-              <Image src={web2} className="rounded-lg object-cover"
+            <div className="snap-center h-96 w-96 m-2 flex-shrink-0 transition-all duration-300 hover:scale-95">
+              <Image src={web2} className="rounded-lg object-cover shadow-lg"
               width={'100%'}
               height={'100%'}
               layout="responsive" />
             </div>
 
-            <div className="basis-1/3 flex-1">
-              <Image src={web3} className="rounded-lg object-cover" 
+            <div className="snap-center h-96 w-96 m-2 flex-shrink-0 transition-all duration-300 hover:scale-95">
+              <Image src={web3} 
                width={'100%'}
                height={'100%'} 
                layout="responsive" 
                />
             </div>
 
-            <div className="basis-1/3 flex-1">
-              <Image src={web4} className="rounded-lg object-cover" 
+            <div className="snap-center h-96 w-96 m-2 flex-shrink-0 transition-all duration-300 hover:scale-95">
+              <Image src={web4}
                 width={'100%'} 
                 height={'100%'} 
                 layout="responsive" 
                 />  
             </div>
 
-            <div className="basis-1/3 flex-1">
-              <Image src={web5} className="rounded-lg object-cover" 
+            <div className="snap-center h-96 w-96 m-2 flex-shrink-0 transition-all duration-300 hover:scale-95">
+              <Image src={web5} 
                 width={'100%'} 
                 height={'100%'} 
                 layout="responsive" 
                 />
             </div>
 
-            <div className="basis-1/3 flex-1">
-              <Image src={web6} className="rounded-lg object-cover" 
+            <div className="snap-center h-96 w-96 m-2 flex-shrink-0 transition-all duration-300 hover:scale-95">
+              <Image src={web6} 
                 width={'100%'} 
                 height={'100%'} 
                 layout="responsive" 
@@ -199,8 +200,10 @@ export default function Home() {
             </div>
 
           </div>
-         </section>
-      </main>
+        </div>
+          </section>
+         </main>
+ 
     </div>
   );
 
