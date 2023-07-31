@@ -20,6 +20,7 @@ import web4 from '../public/web4.png'
 import web5 from '../public/web5.png'
 import web6 from '../public/web6.png'
 import { useState, useEffect } from "react";
+import headshot from "../public/headshot.jpg"
 import ToolTip from "./ToolTip";
 import DownloadButton from "./donwloadButton";
 import ContactButton from "./Contact";
@@ -83,14 +84,14 @@ export default function Home() {
             
           </div>
           <div className="relative mx-auto bg-gradient-to-b from-blue-500 rounded-full w-80 h-80 mt-20 overflow-hidden md:h-96 md:w-96">
-            <Image src={deved} layout="fill" objectFit="cover"/>
+            <Image src={headshot} objectFit="cover"/>
           </div>
          </section>
          <section>
           <div className="">
             <h2 className="text-4xl py-2 text-center dark:text-white">About Me</h2>
             <p className="relative text-md py-2 leading-9 text-gray-800 text-center lg:mx-auto dark:text-white"  >
-            Hey there! Im Chiedozie, a Computer Science major hailing from Katy, Texas. Ever since I can remember, Ive had this burning passion for technology, especially when it comes to computers.
+            Hey there! I'm Chiedozie, a Computer Science major hailing from Katy, Texas. Ever since I can remember, Ive had this burning passion for technology, especially when it comes to the world of development.
             Ive always been that kid who rocked it in the computer classes. Now, I want to take that passion to the next level and turn it into a full-blown career. So, I decided to dive into the exciting 
             world of software engineering. Im planning to start off as a backend developer, but my ultimate goal is to work my way up to a full stack developer and land a postion at either a major Tech Company or a FAANG. On the side, when I'm not buried in coursework, Im working on some pretty awesome side projects. You should totally check them out on my <a className="font-bold" href="https://github.com/Cephrius/">GitHub Link.</a>
             
