@@ -19,7 +19,7 @@ function ToolTip ({ children, tooltip, textSize })  {
       {tooltip ? (
         <span
           ref={tooltipRef}
-          className={`invisible group-hover:visible opacity-0 group-hover:opacity-100 transition bg-blue-400 text-gray-800 dark:text-white dark:bg-blue-600 p-1 font-bold rounded absolute top-full mt-2 whitespace-nowrap text-${textSize}`}
+          className={`invisible group-hover:visible opacity-0 group-hover:opacity-100 transition bg-blue-400 text-gray-800 dark:text-white dark:bg-blue-600 p-1 font-bold rounded absolute top-full mt-2 whitespace-nowrap text-${textSize}` }
         >
           {tooltip}
         </span>
