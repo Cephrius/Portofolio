@@ -27,9 +27,7 @@ import DownloadButton from "./donwloadButton";
 import { motion, AnimatePresence} from "framer-motion";
 import ContactButton from "./Contact";
 import React from "react";
-import Fade from 'react-reveal/Fade';
-import Slide from 'react-reveal/Slide';
-import Flip from 'react-reveal/Flip'
+import {Fade,Slide, Flip} from 'react-awesome-reveal';
 
 
 export default function Home() {
