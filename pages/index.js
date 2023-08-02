@@ -24,20 +24,15 @@ import { useRouter } from "next/router";
 import headshot from "../public/headshot.jpg"
 import ToolTip from "./ToolTip";
 import DownloadButton from "./donwloadButton";
-import { motion, AnimatePresence} from "framer-motion";
+
 import ContactButton from "./Contact";
 import React from "react";
-import {Fade,Slide, Flip} from 'react-awesome-reveal';
+import {Slide, Flip} from 'react-awesome-reveal';
 
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
 
-  const router = useRouter();
-  
-  const handleButtonClick = () => {
-    router.push('./myGear');
-  }
   
   return (
     <div className={darkMode ? "dark" : ""}>
