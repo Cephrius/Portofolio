@@ -27,7 +27,9 @@ import DownloadButton from "./donwloadButton";
 
 import ContactButton from "./Contact";
 import React from "react";
-import {Slide, Flip} from 'react-awesome-reveal';
+import Slide from 'react-reveal';
+import Flip from 'react-reveal';
+import { Bounce } from "react-awesome-reveal";
 
 
 export default function Home() {
@@ -58,7 +60,7 @@ export default function Home() {
       <main className="bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900 "> {/* add fade in to dark mode feature */}
         
           <section className=" h-screen">
-            <Slide top >
+            <Slide top>
               <nav className="py-10 mb-12 flex justify-between">
                 <ToolTip tooltip={"Chiedozie Ehileme"} > 
                   <Slide top>
@@ -93,14 +95,14 @@ export default function Home() {
             </div>
           </Slide>
           <section>
-            <Flip top big cascade>
+            <Bounce top cascade>
               <div className="flex justify-center">
                   <button className="bg bg-gradient-to-r from-blue-500 to-blue-400 rounded-md px-12 py-2 font-bold text-white duration-200 hover:scale-125"
                     onClick={handleButtonClick}>
                       Check Out My Gear
                   </button>
               </div>
-            </Flip>
+            </Bounce>
           </section>
     
           
