@@ -33,6 +33,11 @@ import {Slide, Flip} from 'react-awesome-reveal';
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
 
+  const router = useRouter();
+  
+  const handleButtonClick = () => {
+    router.push('./myGear');
+  }
   
   return (
     <div className={darkMode ? "dark" : ""}>
