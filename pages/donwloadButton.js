@@ -1,5 +1,5 @@
 import React from 'react';
-import Slide from 'react-reveal/Slide'
+import {Slide, Flip} from 'react-awesome-reveal';
 
 const DownloadButton = () => {
   const downloadFile = () => {

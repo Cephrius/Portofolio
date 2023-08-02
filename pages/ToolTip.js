@@ -1,7 +1,6 @@
 import { max } from "moment";
 import React, { useRef } from "react";
-import Fade from "react-reveal/Fade";
-import Slide from "react-reveal/Slide"
+import {Slide, Flip} from 'react-awesome-reveal';
 
 function ToolTip ({ children, tooltip, textSize})  {
   const tooltipRef = useRef(null);
