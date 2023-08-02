@@ -27,9 +27,8 @@ import DownloadButton from "./donwloadButton";
 
 import ContactButton from "./Contact";
 import React from "react";
-import Slide from 'react-reveal';
-import Flip from 'react-reveal';
-import { Bounce } from "react-awesome-reveal";
+import { Slide,Bounce,Flip } from "react-awesome-reveal";
+
 
 
 export default function Home() {
@@ -61,17 +60,17 @@ export default function Home() {
       <main className="bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900 "> {/* add fade in to dark mode feature */}
         
           <section className=" h-screen">
-            <Slide top>
+            <Slide direction="down" triggerOnce onVisibilityChange={false}>
               <nav className="py-10 mb-12 flex justify-between">
                 <ToolTip tooltip={"Chiedozie Ehileme"} > 
-                  <Slide top>
+                  <Slide direction="down" triggerOnce onVisibilityChange={false}>
                     <h1 className="text-xl font-burtons dark:text-white " ><a href="localhost:3000" >chiedozie ehileme</a></h1>
                   </Slide>
                 </ToolTip>
                     <ul className="flex items-center">
                       <li>
                           <ToolTip tooltip={ darkMode ? "Toggle Light Mode": "Toggle Dark Mode"}  >
-                            <Slide top>
+                            <Slide direction="down" triggerOnce onVisibilityChange={false}>
                                 <BsFillMoonStarsFill  className="cursor-pointer text-xl dark:text-yellow-400" 
                                   onClick={() => setDarkMode(!darkMode)}
                                 />
@@ -88,7 +87,7 @@ export default function Home() {
                     </ul>
               </nav>
             </Slide>
-          <Slide top small >
+          <Slide direction="down" triggerOnce onVisibilityChange={false}>
             <div className="text-center p-10 ">
               <h2 className="text-5xl py-2 text-blue-500 font-medium md:text-6xl">Chiedozie Ehileme</h2>
               <h3 className="text-2xl py-2 md:text-3xl dark:text-white">Computer Science Major.</h3>
@@ -96,7 +95,7 @@ export default function Home() {
             </div>
           </Slide>
           <section>
-            <Bounce top cascade>
+            <Bounce direction="top" triggerOnce onVisibilityChange={false}>
               <div className="flex justify-center">
                   <button className="bg bg-gradient-to-r from-blue-500 to-blue-400 rounded-md px-12 py-2 font-bold text-white duration-200 hover:scale-125"
                     onClick={handleButtonClick}>
@@ -110,33 +109,33 @@ export default function Home() {
             <div className="text-6xl flex justify-center gap-16 py-10 text-gray-600 dark:text-white ">
               
                 <ToolTip textSize="lg" tooltip={"Linkedin"}  ><a href="https://www.linkedin.com/in/chiedozie-ehileme-529b6a25b/" target="_blank" rel="noreferrer">
-                    <Slide left big>
+                    <Slide direction="left" cascade={true} damping={20}> 
                       <AiFillLinkedin className="duration-300 hover:scale-125" />
                     </Slide>
                   </a>
                 </ToolTip>
 
                 <ToolTip textSize="lg" tooltip={"GitHub"}  ><a href="https://github.com/Cephrius/" target="_blank" rel="noreferrer">
-                  <Slide left big >
+                  <Slide direction="left" cascade={true}>
                     <AiFillGithub className="duration-300 hover:scale-125" />
                   </Slide>
                   </a>
                 </ToolTip>
                 <ToolTip textSize="lg" tooltip={"Instagram"}><a href="https://www.instagram.com/chiedozie.py/" target="_blank" rel="noreferrer" >
-                  <Slide right big>
+                  <Slide direction="right" cascade={true}>
                       <AiFillInstagram className="duration-300 hover:scale-125"/> 
                   </Slide> 
                   </a> 
                 </ToolTip>
                 <ToolTip textSize="lg" tooltip={"Twitter"}><a href="https://twitter.com/CEhileme" target="_blank" rel="noreferrer">
-                  <Slide right big>
+                  <Slide direction="right" cascade={true}>
                     <AiFillTwitterCircle className="duration-300 hover:scale-125" />
                   </Slide>
                   </a>
                 </ToolTip>
              
             </div>
-          <Slide top >
+          <Slide direction="up" triggerOnce onVisibilityChange={false}>
             <div className="relative mx-auto bg-gradient-to-b from-blue-500 rounded-full w-80 h-80 mt-20 overflow-hidden md:h-96 md:w-96">
               <Image src={headshot} objectFit="cover"/>
             </div>
