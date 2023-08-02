@@ -1,45 +1,66 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Head from "next/head";
-import { BsFillMoonStarsFill } from 'react-icons/bs';
+import { 
+  BsFillMoonStarsFill,
+  BsArrowDownCircle
+} from 'react-icons/bs';
 import {
   AiFillTwitterCircle, 
   AiFillLinkedin, 
   AiFillGithub,
   AiFillInstagram,
+  AiOutlineClose
   
 } from 'react-icons/ai'
 import Image from "next/image";
 import deved from '../public/dev-ed-wave.png';
 import design from '../public/design.png'
 import code from '../public/code.png'
-
 import web1 from '../public/web1.png'
 import web2 from '../public/web2.png'
 import web3 from '../public/web3.png'
 import web4 from '../public/web4.png'
 import web5 from '../public/web5.png'
 import web6 from '../public/web6.png'
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment} from "react";
 import { useRouter } from "next/router";
 import headshot from "../public/headshot.jpg"
 import ToolTip from "./ToolTip";
 import DownloadButton from "./donwloadButton";
-
 import ContactButton from "./Contact";
 import React from "react";
-import { Slide,Bounce,Flip } from "react-awesome-reveal";
+import { Slide,Bounce,Flip,Fade } from "react-awesome-reveal";
+import { Dialog, Transition} from "@headlessui/react";
+
+
 
 
 
 export default function Home() {
   
   const [darkMode, setDarkMode] = useState(false);
-
-  const router = useRouter();
+  let [isOpen, setIsOpen] = useState(false);
   
-  const handleButtonClick = () => {
-    router.push('./myGear');
+
+  function closeModal() {
+    setIsOpen(false);
   }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  
+  const handleScrollToMiddle = () => {
+    const middleOfPage = window.innerHeight / 0.998;
+    
+    window.scrollTo({
+      top: middleOfPage,
+      behavior: "smooth",
+    });
+  };
+    
+
+
   
   return (
     <div className={darkMode ? "dark" : ""}>
@@ -52,11 +73,71 @@ export default function Home() {
     
       <Head>
         <title>Chiedozie</title>
-        <meta name="viewport" content="width=device-width, initial-scale=0.65"/>
+        <meta name="viewport" content="width=device-width, initial-scale=0.63"/>
         <link rel="icon" href="logo.jpg" />
       </Head>
 
-      
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+               
+                      
+                
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
+                  
+                    <Dialog.Title
+                      as="h1"
+                      className="text-2xl font-medium leading-6 text-gray-900 pb-5"
+                    >
+                      My Gear
+                     
+                    </Dialog.Title>
+
+                    <p className="text-sm text-gray-500">
+                      Here's some of the gear that I use - Check em out !
+                    </p>
+                 
+              
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}
+                    >
+                      Got it, thanks!
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
       <main className="bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900 "> {/* add fade in to dark mode feature */}
         
           <section className=" h-screen">
@@ -70,7 +151,7 @@ export default function Home() {
                     <ul className="flex items-center">
                       <li>
                           <ToolTip tooltip={ darkMode ? "Toggle Light Mode": "Toggle Dark Mode"}  >
-                            <Slide direction="down" triggerOnce onVisibilityChange={false}>
+                            <Slide direction="down" triggerOnce onVisibilityChange={false} >
                                 <BsFillMoonStarsFill  className="cursor-pointer text-xl dark:text-yellow-400" 
                                   onClick={() => setDarkMode(!darkMode)}
                                 />
@@ -98,7 +179,7 @@ export default function Home() {
             <Bounce direction="top" triggerOnce onVisibilityChange={false}>
               <div className="flex justify-center">
                   <button className="bg bg-gradient-to-r from-blue-500 to-blue-400 rounded-md px-12 py-2 font-bold text-white duration-200 hover:scale-125"
-                    onClick={handleButtonClick}>
+                    onClick={openModal}>
                       Check Out My Gear
                   </button>
               </div>
@@ -136,16 +217,23 @@ export default function Home() {
              
             </div>
           <Slide direction="up" triggerOnce onVisibilityChange={false}>
-            <div className="relative mx-auto bg-gradient-to-b from-blue-500 rounded-full w-80 h-80 mt-20 overflow-hidden md:h-96 md:w-96">
+            <div className="relative mx-auto bg-gradient-to-b from-blue-500 rounded-full w-80 h-80 mt-10 overflow-hidden md:h-96 md:w-96">
               <Image src={headshot} objectFit="cover"/>
             </div>
           </Slide>
+          <Fade  delay={1000} triggerOnce onVisibilityChange={false}>
+            <div className= " relative mx-auto flex justify-center py-16 text-3xl animate-bounce-slow ">
+              <BsArrowDownCircle 
+                  onClick={handleScrollToMiddle}
+              />
+            </div>
+          </Fade>
          </section>
          
          <section>
-          <div className="">
+          <div >
             <h2 className="text-4xl py-2 text-center dark:text-white">About Me</h2>
-            <p className="relative text-md py-2 leading-9 text-gray-800 text-center lg:mx-auto dark:text-white"  >
+            <p className="relative text-md py-2 leading-9 text-gray-800 text-center sm:mx-0 md:mx-0 lg:mx-96 dark:text-white"  >
             Hey there! I'm Chiedozie, a Computer Science major hailing from Katy, Texas. Ever since I can remember, Ive had this burning passion for technology, especially when it comes to the world of development.
             Ive always been that kid who rocked it in the computer classes. Now, I want to take that passion to the next level and turn it into a full-blown career. So, I decided to dive into the exciting 
             world of software engineering. Im planning to start off as a backend developer, but my ultimate goal is to work my way up to a full stack developer and land a postion at either a major Tech Company or a FAANG. On the side, when I'm not buried in coursework, Im working on some pretty awesome side projects. You should totally check them out on my <a className="font-bold" href="https://github.com/Cephrius/">GitHub Link.</a>
@@ -161,7 +249,7 @@ export default function Home() {
               <Image src={design} width={100} height={100}/>
               <h3 className="text-lg font-medium pt-8 pb-2 dark:text-white">Side Projects</h3>
               <p className="py-2 dark:text-white ">
-                Majority of my side projects are apps and websites that I am working
+                Majority of my side projects are apps and websites that I am working on.
               </p>
               <h4 className="py-4 text-blue-600 dark:text-blue-400">Current projects in the works :</h4>
               <p className="text-gray-800 py-1 dark:text-white">Personal Portofolio</p>
@@ -256,7 +344,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>       
+      </main>
     </div>
   
   
