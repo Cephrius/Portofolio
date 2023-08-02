@@ -35,19 +35,6 @@ import Flip from 'react-reveal/Flip'
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
 
-  useEffect(() => {
-    // Load the darkMode state from Local Storage on initial render
-    const savedDarkMode = JSON.parse(localStorage.getItem('darkMode'));
-    if (savedDarkMode !== null) {
-      setDarkMode(savedDarkMode);
-    }
-  }, []);
-  
-  // Save the darkMode state to Local Storage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
-
   const router = useRouter();
   
   const handleButtonClick = () => {
