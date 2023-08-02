@@ -33,7 +33,19 @@ import { Bounce } from "react-awesome-reveal";
 
 
 export default function Home() {
+  const initialDarkMode = JSON.parse(localStorage.getItem('darkMode')) || false;
   const [darkMode, setDarkMode] = useState(false);
+
+  // Use useEffect to update Local Storage whenever the darkMode state changes
+  useEffect(() => {
+    // Save the darkMode state to Local Storage
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  // Function to toggle the darkMode state
+  const toggleDarkMode = () => {
+    setDarkMode(prevDarkMode => !prevDarkMode);
+  };
 
   const router = useRouter();
   
@@ -42,7 +54,7 @@ export default function Home() {
   }
   
   return (
-    <div className={darkMode ? "dark" : ""}>
+    <div className={darkMode ? "dark" : "light-theme"}>
       <meta
         name="format-detection"
         content="telephone=no, date=no, email=no, address=no"
@@ -72,8 +84,9 @@ export default function Home() {
                           <ToolTip tooltip={ darkMode ? "Toggle Light Mode": "Toggle Dark Mode"}  >
                             <Slide top>
                                 <BsFillMoonStarsFill  className="cursor-pointer text-xl dark:text-yellow-400" 
-                                  onClick={() => setDarkMode(!darkMode)}
+                                  onClick={toggleDarkMode}
                                 />
+                                
                             </Slide>
                           </ToolTip>
                           
