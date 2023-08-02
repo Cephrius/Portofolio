@@ -2,12 +2,12 @@ import { Component } from 'react'
 import '../styles/globals.css'
 import dynamic from 'next/dynamic'
 import { useState,useEffect } from 'react'
-
-
+import { Analytics, analytics } from '@vercel/analytics/react'
 
 
 function MyApp({ Component, pageProps }) {
   const [showing, setShowing] = useState(false);
+  
 
   useEffect(() => {
     setShowing(true);
@@ -18,10 +18,14 @@ function MyApp({ Component, pageProps }) {
   }
 
   if (typeof window === 'undefined') {
-    return <></>;
+    return <>
+         
+         </>;
   } else {
     return (
+      
          <Component {...pageProps} />
+  
     );
   }
 }
