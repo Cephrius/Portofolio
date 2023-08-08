@@ -2,7 +2,8 @@
 import Head from "next/head";
 import { 
   BsFillMoonStarsFill,
-  BsArrowDownCircle
+  BsArrowDownCircle,
+  BsMoonStarsFill
 } from 'react-icons/bs';
 import {
   AiFillTwitterCircle, 
@@ -12,6 +13,7 @@ import {
   AiOutlineClose
   
 } from 'react-icons/ai'
+
 import Image from "next/image";
 import deved from '../public/dev-ed-wave.png';
 import design from '../public/design.png'
@@ -30,17 +32,32 @@ import DownloadButton from "./donwloadButton";
 import ContactButton from "./Contact";
 import React from "react";
 import { Slide,Bounce,Flip,Fade } from "react-awesome-reveal";
-import { Dialog, Transition} from "@headlessui/react";
-
+import { Dialog, Transition, Menu} from "@headlessui/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
+  Button,
+  dropdownMenu
+} from "@nextui-org/react";
 
 
 
 
 export default function Home() {
-  
   const [darkMode, setDarkMode] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const selectedValue = React.useMemo(
+    () => [...selectedKeys].sort().join(", ").replaceAll("_", " "),
+    [selectedKeys]
+  );
   
+
 
   function closeModal() {
     setIsOpen(false);
@@ -51,19 +68,36 @@ export default function Home() {
   }
   
   const handleScrollToMiddle = () => {
-    const middleOfPage = window.innerHeight / 0.998;
+    const middleOfPage = window.innerHeight / 0.999;
     
     window.scrollTo({
       top: middleOfPage,
       behavior: "smooth",
     });
   };
-    
+  
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  }
 
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode)
+    localStorage.setItem("darkMode", JSON.stringify(newDarkMode)
+    );
+  }
 
+  useEffect(() => {
+    const darkModeData = localStorage.getItem("darkMode");
+    if (darkModeData !== null) {
+      setDarkMode(JSON.parse(darkModeData));
+    }
+  }, []);
+
+ 
   
   return (
-    <div className={darkMode ? "dark" : ""}>
+    <div className={`app-container ${darkMode ? "dark-mode" : "light-mode"}`}>
       <meta
         name="format-detection"
         content="telephone=no, date=no, email=no, address=no"
@@ -71,7 +105,7 @@ export default function Home() {
     
     <time datetime="2016-10-25" suppressHydrationWarning />
     
-      <Head>
+      <Head className="dark:dark-mode">
         <title>Chiedozie</title>
         <meta name="viewport" content="width=device-width, initial-scale=0.63"/>
         <link rel="icon" href="logo.jpg" />
@@ -137,27 +171,52 @@ export default function Home() {
           </div>
         </Dialog>
       </Transition>
-
-      <main className="bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900 "> {/* add fade in to dark mode feature */}
+      {/* add fade in to dark mode feature */}
+      <main className={"bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:dark-mode "}> 
         
-          <section className=" h-screen">
+ 
+          <section className=" h-screen dark:dark-mode">
             <Slide direction="down" triggerOnce onVisibilityChange={false}>
               <nav className="py-10 mb-12 flex justify-between">
+               
                 <ToolTip tooltip={"Chiedozie Ehileme"} > 
                   <Slide direction="down" triggerOnce onVisibilityChange={false}>
                     <h1 className="text-xl font-burtons dark:text-white " ><a href="localhost:3000" >chiedozie ehileme</a></h1>
+
                   </Slide>
                 </ToolTip>
-                    <ul className="flex items-center">
-                      <li>
-                          <ToolTip tooltip={ darkMode ? "Toggle Light Mode": "Toggle Dark Mode"}  >
-                            <Slide direction="down" triggerOnce onVisibilityChange={false} >
-                                <BsFillMoonStarsFill  className="cursor-pointer text-xl dark:text-yellow-400" 
-                                  onClick={() => setDarkMode(!darkMode)}
-                                />
-                            </Slide>
-                          </ToolTip>
-                      </li>
+                    <ul className=" flex items-center">
+                      <li >                  
+                        
+                      <div>
+                      <Dropdown>
+                        <DropdownTrigger>
+                          <Button 
+                            variant="bordered" 
+                            className="capitalize"
+                            isIconOnly
+                          >
+                           <BsMoonStarsFill className="text-xl mt-2 dark:text-yellow-400" /> 
+                          </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu 
+                          aria-label="Single selection actions"
+                          variant="flat"
+                          disallowEmptySelection
+                          selectionMode="single"
+                          selectedKeys={selectedKeys}
+                          onSelectionChange={setSelectedKeys}
+                          closeOnSelect={false}
+                          className="bg-gradient-to-b from-blue-400 to-blue-200 rounded-xl w-32"
+                        >
+                          <DropdownItem key="Automatic" onClick={toggleDarkMode}>Automatic</DropdownItem>
+                          <DropdownItem key="Dark">Dark</DropdownItem>
+                          <DropdownItem key="Light">Light</DropdownItem>
+
+                        </DropdownMenu>
+                      </Dropdown>
+                      </div>
+                        </li>
                         <li>
                           <DownloadButton />
                         </li>
@@ -165,10 +224,12 @@ export default function Home() {
                           <ContactButton  />
                         </li>
                     </ul>
+                    
               </nav>
+      
             </Slide>
           <Slide direction="down" triggerOnce onVisibilityChange={false}>
-            <div className="text-center p-10 ">
+            <div className="text-center p-8 ">
               <h2 className="text-5xl py-2 text-blue-500 font-medium md:text-6xl">Chiedozie Ehileme</h2>
               <h3 className="text-2xl py-2 md:text-3xl dark:text-white">Computer Science Major.</h3>
               <p className="text-md py-5 leading-8 text-gray-800 md:text-xl max-w-lg mx-auto dark:text-white">Current Computer Science Major with the goal of becoming a software engineer; Future CEO of Cephrius Technologies</p>
@@ -184,7 +245,7 @@ export default function Home() {
               </div>
             </Bounce>
           </section>
-    
+          
           
             <div className="text-6xl flex justify-center gap-16 py-10 text-gray-600 dark:text-white ">
               
@@ -217,12 +278,12 @@ export default function Home() {
             </div>
           <Slide direction="up" triggerOnce onVisibilityChange={false}>
             <div className="relative mx-auto bg-gradient-to-b from-blue-500 rounded-full w-80 h-80 mt-10 overflow-hidden md:h-96 md:w-96">
-              <Image src={headshot} objectFit="cover"/>
+              <Image src={headshot} objectFit="cover" alt="Headshot of Chiedozie Ehileme"/>
             </div>
           </Slide>
           <Fade  delay={1000} triggerOnce onVisibilityChange={false}>
-            <div className= " relative mx-auto flex justify-center py-16 text-3xl animate-bounce-slow ">
-              <BsArrowDownCircle 
+            <div className= " relative mx-auto flex justify-center py-12 text-4xl animate-bounce-slow m-6 dark:text-white ">
+              <BsArrowDownCircle className="hover:cursor-pointer"
                   onClick={handleScrollToMiddle}
               />
             </div>
@@ -231,8 +292,8 @@ export default function Home() {
          
          <section>
           <div >
-            <h2 className="text-4xl py-2 text-center dark:text-white">About Me</h2>
-            <p className="relative text-md py-2 leading-9 text-gray-800 text-center sm:mx-0 md:mx-0 lg:mx-96 dark:text-white"  >
+            <h2 className="text-4xl py-10 text-center dark:text-white">About Me</h2>
+            <p className="relative text-md py-2 leading-9 text-gray-800 text-center lg:mx-32 dark:text-white"  >
             Hey there! I'm Chiedozie, a Computer Science major hailing from Katy, Texas. Ever since I can remember, Ive had this burning passion for technology, especially when it comes to the world of development.
             Ive always been that kid who rocked it in the computer classes. Now, I want to take that passion to the next level and turn it into a full-blown career. So, I decided to dive into the exciting 
             world of software engineering. Im planning to start off as a backend developer, but my ultimate goal is to work my way up to a full stack developer and land a postion at either a major Tech Company or a FAANG. On the side, when I'm not buried in coursework, 
@@ -244,9 +305,11 @@ export default function Home() {
             </p>
             </p>
           </div>
-          <div className="lg:flex justify-center gap-28">
-            <div className="text-center shadow-2xl p-10 rounded-xl my-10 border-black border-10 transition-all duration-400 hover:scale-110" >
-              <Image src={design} width={100} height={100}/>
+          <div className="lg:flex gap-28 justify-center ">
+            <div class="text-center shadow-2xl p-10 rounded-xl my-10 border-black border-10 transition-all duration-400 hover:scale-110 " >
+              <div className="flex justify-center items-center mb-6">
+                <Image src={design} width={100} height={100} alt="image for project block" />
+              </div>
               <h3 className="text-lg font-medium pt-8 pb-2 dark:text-white">Side Projects</h3>
               <p className="py-2 dark:text-white ">
                 Majority of my side projects are apps and websites that I am working on.
@@ -264,7 +327,9 @@ export default function Home() {
 
             </div>
             <div className="text-center shadow-2xl p-10 rounded-xl my-10 border-black border-10 dark:text-white transition-all duration-300 hover:scale-110" >
-              <Image src={code} width={100} height={100}/>
+              <div className="flex justify-center items-center mb-6">
+                <Image src={code} width={100} height={100} alt="image for tools learned"/>
+              </div>
               <h3 className="text-lg font-medium pt-8 pb-2 dark:text-white">Tools and Programming Languages</h3>
               <p className="py-2 dark:text-white">
                 Majority of my side projects are apps that are built using these tools.
@@ -285,7 +350,7 @@ export default function Home() {
           </div>
          </section>
          <section>
-          <div className={darkMode ? "text-white":"text-gray-800"} >
+          <div className={darkMode ? "text-white":"text-gray-800"}  >
             
             <h3 className="text-4xl py-1 text-center">Portofolio</h3>
             <p className="text-md py-2 leading-8 text-center ">
@@ -345,6 +410,8 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+
     </div>
   
   

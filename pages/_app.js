@@ -3,6 +3,8 @@ import '../styles/globals.css'
 import dynamic from 'next/dynamic'
 import { useState,useEffect } from 'react'
 import { Analytics, analytics } from '@vercel/analytics/react'
+import {NextUIProvider} from '@nextui-org/react'
+
 
 
 function MyApp({ Component, pageProps }) {
@@ -23,8 +25,10 @@ function MyApp({ Component, pageProps }) {
          </>;
   } else {
     return (
-      
-         <Component {...pageProps} />
+      <NextUIProvider>
+      <Component {...pageProps} />  
+      </NextUIProvider>
+
   
     );
   }
