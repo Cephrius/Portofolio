@@ -30,17 +30,33 @@ import DownloadButton from "./donwloadButton";
 import ContactButton from "./Contact";
 import React from "react";
 import { Slide,Bounce,Flip,Fade } from "react-awesome-reveal";
-import { Dialog, Transition} from "@headlessui/react";
+import { Dialog, Transition, Menu} from "@headlessui/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
+  Button,
+  dropdownMenu
+} from "@nextui-org/react";
+
 
 
 
 
 
 export default function Home() {
-  
   const [darkMode, setDarkMode] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
+
+  const selectedValue = React.useMemo(
+    () => [...selectedKeys].sort().join(", ").replaceAll("_", " "),
+    [selectedKeys]
+  );
   
+
 
   function closeModal() {
     setIsOpen(false);
@@ -58,9 +74,22 @@ export default function Home() {
       behavior: "smooth",
     });
   };
-    
 
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode)
+    localStorage.setItem("darkMode", JSON.stringify(newDarkMode)
+    );
+  }
 
+  useEffect(() => {
+    const darkModeData = localStorage.getItem("darkMode");
+    if (darkModeData !== null) {
+      setDarkMode(JSON.parse(darkModeData));
+    }
+  }, []);
+
+ 
   
   return (
     <div className={darkMode ? "dark" : ""}>
@@ -137,28 +166,43 @@ export default function Home() {
           </div>
         </Dialog>
       </Transition>
-
-      <main className="bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900 "> {/* add fade in to dark mode feature */}
+      {/* add fade in to dark mode feature */}
+      <main className={"bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900 "}> 
         
+ 
           <section className=" h-screen">
             <Slide direction="down" triggerOnce onVisibilityChange={false}>
               <nav className="py-10 mb-12 flex justify-between">
+               
                 <ToolTip tooltip={"Chiedozie Ehileme"} > 
                   <Slide direction="down" triggerOnce onVisibilityChange={false}>
                     <h1 className="text-xl font-burtons dark:text-white " ><a href="localhost:3000" >chiedozie ehileme</a></h1>
                   </Slide>
                 </ToolTip>
-                    <ul className="flex items-center">
-                      <li>
-                          <ToolTip tooltip={ darkMode ? "Toggle Light Mode": "Toggle Dark Mode"}  >
-                            <Slide direction="down" triggerOnce onVisibilityChange={false} >
-                                <BsFillMoonStarsFill  className="cursor-pointer text-xl dark:text-yellow-400" 
-                                  onClick={() => setDarkMode(!darkMode)}
-                                />
-                            </Slide>
-                          </ToolTip>
+                    <ul className=" flex items-center">
+                      <li >                  
+                            <Dropdown >
+                              <DropdownTrigger>
+                                <BsFillMoonStarsFill className="cursor-pointer text-xl dark:text-yellow-400" onClick={dropdownMenu}/>
+                              </DropdownTrigger>
+                              {/* Position the DropdownMenu absolutely */}
+                              <DropdownMenu 
+                                aria-label="dynamic actions"
+                                variant="flat"
+                                closeOnSelect={false}
+                                disallowEmptySelection
+                                selectionMode="single"
+                                selectedKeys={selectedKeys}
+                                onSelectionChange={setSelectedKeys}
+                                className="absolute py-10">
+                                
+                                <DropdownItem key="Automatic">Automatic</DropdownItem>
+                                <DropdownItem key="Dark">Dark</DropdownItem>
+                                <DropdownItem key="Light">Light</DropdownItem>
+                              </DropdownMenu>
+                            </Dropdown>
                           
-                      </li>
+                        </li>
                         <li>
                           <DownloadButton />
                         </li>
@@ -166,7 +210,9 @@ export default function Home() {
                           <ContactButton  />
                         </li>
                     </ul>
+                    
               </nav>
+      
             </Slide>
           <Slide direction="down" triggerOnce onVisibilityChange={false}>
             <div className="text-center p-10 ">
@@ -185,7 +231,7 @@ export default function Home() {
               </div>
             </Bounce>
           </section>
-    
+          
           
             <div className="text-6xl flex justify-center gap-16 py-10 text-gray-600 dark:text-white ">
               
@@ -222,8 +268,8 @@ export default function Home() {
             </div>
           </Slide>
           <Fade  delay={1000} triggerOnce onVisibilityChange={false}>
-            <div className= " relative mx-auto flex justify-center py-16 text-3xl animate-bounce-slow ">
-              <BsArrowDownCircle 
+            <div className= " relative mx-auto flex justify-center py-16 text-4xl animate-bounce-slow m-6 dark:text-white ">
+              <BsArrowDownCircle className="hover:cursor-pointer"
                   onClick={handleScrollToMiddle}
               />
             </div>
@@ -233,7 +279,7 @@ export default function Home() {
          <section>
           <div >
             <h2 className="text-4xl py-2 text-center dark:text-white">About Me</h2>
-            <p className="relative text-md py-2 leading-9 text-gray-800 text-center sm:mx-0 md:mx-0 lg:mx-96 dark:text-white"  >
+            <p className="relative text-md py-2 leading-9 text-gray-800 text-center lg:mx-32 dark:text-white"  >
             Hey there! I'm Chiedozie, a Computer Science major hailing from Katy, Texas. Ever since I can remember, Ive had this burning passion for technology, especially when it comes to the world of development.
             Ive always been that kid who rocked it in the computer classes. Now, I want to take that passion to the next level and turn it into a full-blown career. So, I decided to dive into the exciting 
             world of software engineering. Im planning to start off as a backend developer, but my ultimate goal is to work my way up to a full stack developer and land a postion at either a major Tech Company or a FAANG. On the side, when I'm not buried in coursework, Im working on some pretty awesome side projects. You should totally check them out on my <a className="font-bold" href="https://github.com/Cephrius/">GitHub Link.</a>
@@ -285,7 +331,7 @@ export default function Home() {
           </div>
          </section>
          <section>
-          <div className={darkMode ? "text-white":"text-gray-800"} >
+          <div className={darkMode ? "text-white":"text-gray-800"}  >
             
             <h3 className="text-4xl py-1 text-center">Portofolio</h3>
             <p className="text-md py-2 leading-8 text-center ">
