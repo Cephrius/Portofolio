@@ -20,7 +20,10 @@ export const theme = {
       burtons: "burtons"
     },
     darkMode: "class",
-    plugins: [nextui()],
+   
+    plugins: [
+      nextui()],
+ 
   
     animation: {
       'bounce-slow': 'bounceSlow 2s cubic-bezier(0.2, 0.55, 0.25, 1.5) infinite',

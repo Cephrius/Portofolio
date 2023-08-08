@@ -27,3 +27,25 @@ a {
   font-family: "burtons";
   src: url("../public//Burtons.otf");
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+ background-color:#000000 ;
+}
+
+.app-container {
+  /* Define common styles for both modes */
+}
+
+.light-mode {
+  /* Define background color for light mode */
+  background-color: #ffffff; /* Replace with your light mode background color */
+}
+
+.dark-mode {
+  /* Define background color for dark mode */
+  background-color: #222222; /* Replace with your dark mode background color */
+  color: #ffffff; /* Adjust text color for better visibility in dark mode */
+}
