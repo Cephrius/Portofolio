@@ -16,7 +16,7 @@ import {
   
 } from 'react-icons/ai'
 
-
+import Image  from "next/image";
 import deved from '../public/dev-ed-wave.png';
 import design from '../public/design.png'
 import code from '../public/code.png'
@@ -61,7 +61,6 @@ import {
   CardFooter,
   Divider,
   Link,
-  Image
 } from "@nextui-org/react"
 
 
