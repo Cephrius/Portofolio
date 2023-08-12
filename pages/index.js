@@ -3,7 +3,9 @@ import Head from "next/head";
 import { 
   BsFillMoonStarsFill,
   BsArrowDownCircle,
-  BsMoonStarsFill
+  BsMoonStarsFill,
+  BsSun,
+  BsSunFill,
 } from 'react-icons/bs';
 import {
   AiFillTwitterCircle, 
@@ -14,7 +16,7 @@ import {
   
 } from 'react-icons/ai'
 
-import Image from "next/image";
+
 import deved from '../public/dev-ed-wave.png';
 import design from '../public/design.png'
 import code from '../public/code.png'
@@ -26,7 +28,7 @@ import web5 from '../public/web5.png'
 import web6 from '../public/web6.png'
 import { useState, useEffect, Fragment} from "react";
 import { useRouter } from "next/router";
-import headshot from "../public/headshot.jpg"
+import headshot from "/public/headshot.jpg"
 import ToolTip from "./ToolTip";
 import DownloadButton from "./donwloadButton";
 import ContactButton from "./Contact";
@@ -40,35 +42,41 @@ import {
   DropdownSection,
   DropdownItem,
   Button,
-  dropdownMenu
+  dropdownMenu,
+  useDisclosure
 } from "@nextui-org/react";
 
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "@nextui-org/react"
 
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Link,
+  Image
+} from "@nextui-org/react"
 
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
-  let [isOpen, setIsOpen] = useState(false);
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set());
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const {isOpen, onOpen, onClose} = useDisclosure();
   const selectedValue = React.useMemo(
     () => [...selectedKeys].sort().join(", ").replaceAll("_", " "),
     [selectedKeys]
   );
-  
 
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-  
   const handleScrollToMiddle = () => {
-    const middleOfPage = window.innerHeight / 0.999;
+    const middleOfPage = window.innerHeight / 0.992;
     
     window.scrollTo({
       top: middleOfPage,
@@ -78,140 +86,137 @@ export default function Home() {
   
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
+    
   }
 
   const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode)
-    localStorage.setItem("darkMode", JSON.stringify(newDarkMode)
-    );
+    if (!darkMode) {
+      const newDarkMode =true;
+      setDarkMode(newDarkMode);
+      localStorage.setItem("darkMode", JSON.stringify(newDarkMode));
+    }
+   
   }
+
+  const toggleLightMode = () => {
+    if (darkMode) {
+      const newDarkMode = false;
+      setDarkMode(newDarkMode);
+      localStorage.setItem("darkMode", JSON.stringify(newDarkMode));
+    }
+  }
+
+  const toggleAutomaticDarkMode = () => {
+    const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    setDarkMode(prefersDarkMode);
+    localStorage.setItem("darkMode", JSON.stringify(prefersDarkMode));
+  };
+
 
   useEffect(() => {
     const darkModeData = localStorage.getItem("darkMode");
     if (darkModeData !== null) {
       setDarkMode(JSON.parse(darkModeData));
+    } else {
+      // Check if the user prefers dark or light mode based on system setting
+      const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+      setDarkMode(prefersDarkMode);
+      localStorage.setItem("darkMode", JSON.stringify(prefersDarkMode));
     }
+  
   }, []);
 
- 
+  useEffect(() => {
+    setSelectedKeys(new Set([darkMode ? "Dark" : "Light"]));
+  }, [darkMode]);
+
   
   return (
-    <div className={`app-container ${darkMode ? "dark-mode" : "light-mode"}`}>
+    
+    <div className={`app-container ${darkMode ? "dark" : " "}`}>
       <meta
         name="format-detection"
         content="telephone=no, date=no, email=no, address=no"
       />
     
+
+      
+    
     <time datetime="2016-10-25" suppressHydrationWarning />
     
-      <Head className="dark:dark-mode">
-        <title>Chiedozie</title>
+      <Head >
+        <title>Chiedozie Ehileme | Computer Science Major </title>
         <meta name="viewport" content="width=device-width, initial-scale=0.63"/>
         <link rel="icon" href="logo.jpg" />
       </Head>
 
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
+    
+    <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} size="2xl"
+     classNames={{
+      backdrop: "bg-[#292f46]/50 backdrop-opacity-40",
+      base: `border-[#292f46] bg-[#ffffff] text-[#a8b0d3] rounded-2xl ${darkMode ? "bg-gradient-to-b from-gray-800 to-blue-500" : "dark: bg bg-gradient-to-t from-gray-300 to-blue-400 text-black"}`,
+      closeButton: "hover:bg-white/5 active:bg-white/10 text-2xl",
+    }} >
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col gap-1 mb-[-30px] text-2xl">My Gear</ModalHeader>
+            <ModalHeader className="flex flex-col font-light "> Here is a list of the gear and tools that I use. </ModalHeader>
+            <ModalBody className="py-6">
+   
 
-          <div className="fixed inset-0 overflow-y-auto">
-            
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-               
-                      
-                
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
-                  
-                    <Dialog.Title
-                      as="h1"
-                      className="text-2xl font-medium leading-6 text-gray-900 pb-5"
-                    >
-                      My Gear
-                     
-                    </Dialog.Title>
+            </ModalBody >
+          </>
+        )}
+      </ModalContent>
+    </Modal>
 
-                    <p className="text-sm text-gray-500">
-                      Here's some of the gear that I use - Check em out !
-                    </p>
-                 
-              
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
       {/* add fade in to dark mode feature */}
-      <main className={"bg-white px-10 md:px-20 lg:px-14 transition-all duration-700 dark:dark-mode "}> 
+      <main className={"bg-[#fffffc] px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900  "}> 
         
  
           <section className=" h-screen dark:dark-mode">
             <Slide direction="down" triggerOnce onVisibilityChange={false}>
               <nav className="py-10 mb-12 flex justify-between">
                
-                <ToolTip tooltip={"Chiedozie Ehileme"} > 
                   <Slide direction="down" triggerOnce onVisibilityChange={false}>
-                    <h1 className="text-xl font-burtons dark:text-white " ><a href="localhost:3000" >chiedozie ehileme</a></h1>
+                    <h1 className="text-lg font-burtons dark:text-white sm:mt-2 " ><a>chiedozie ehileme</a></h1>
 
                   </Slide>
-                </ToolTip>
+                
                     <ul className=" flex items-center">
                       <li >                  
                         
-                      <div>
-                      <Dropdown>
+                      <div >
+                      <Dropdown backdrop="opaque">
                         <DropdownTrigger>
                           <Button 
                             variant="bordered" 
                             className="capitalize"
                             isIconOnly
                           >
-                           <BsMoonStarsFill className="text-xl mt-2 dark:text-yellow-400" /> 
+                            {darkMode ? (
+                              <BsMoonStarsFill className="text-sm mt-2 text-white " />
+                              ) : (
+                              <BsSun className="text-lg mt-2 "/> )
+                            }
+                           
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu 
                           aria-label="Single selection actions"
-                          variant="flat"
+                          variant="faded"
                           disallowEmptySelection
                           selectionMode="single"
                           selectedKeys={selectedKeys}
                           onSelectionChange={setSelectedKeys}
                           closeOnSelect={false}
-                          className="bg-gradient-to-b from-blue-400 to-blue-200 rounded-xl w-32"
-                        >
-                          <DropdownItem key="Automatic" onClick={toggleDarkMode}>Automatic</DropdownItem>
-                          <DropdownItem key="Dark">Dark</DropdownItem>
-                          <DropdownItem key="Light">Light</DropdownItem>
+                          className="bg-gradient-to-b from-blue-500 to-blue-300 rounded-xl w-24 text-xs dark:text-white"
+
+                        >                        
+                         <DropdownItem key="Light" onClick={(e) => { e.stopPropagation(); toggleLightMode(); }} className={` ${darkMode ? "text-white font-bold":""}`}>Light</DropdownItem>
+                        <DropdownItem key="Dark" onClick={(e) => { e.stopPropagation(); toggleDarkMode(); }} className={darkMode ? "text-white font-bold":""} >Dark</DropdownItem>
 
                         </DropdownMenu>
                       </Dropdown>
@@ -230,16 +235,17 @@ export default function Home() {
             </Slide>
           <Slide direction="down" triggerOnce onVisibilityChange={false}>
             <div className="text-center p-8 ">
-              <h2 className="text-5xl py-2 text-blue-500 font-medium md:text-6xl">Chiedozie Ehileme</h2>
-              <h3 className="text-2xl py-2 md:text-3xl dark:text-white">Computer Science Major.</h3>
-              <p className="text-md py-5 leading-8 text-gray-800 md:text-xl max-w-lg mx-auto dark:text-white">Current Computer Science Major with the goal of becoming a software engineer; Future CEO of Cephrius Technologies</p>
+              <h2 className="text-5xl py-2 text-blue-500 font-medium dark:text-blue-400">Chiedozie Ehileme</h2>
+              <h4 className="text-2xl py-2 dark:text-white">Computer Science Major.</h4>
+              <p className="text-md py-5 leading-8 text-gray-800 max-w-lg mx-auto dark:text-white">Current Computer Science Major with the goal of becoming a software engineer; Future CEO of Cephrius Technologies</p>
             </div>
           </Slide>
           <section>
             <Bounce direction="top" triggerOnce onVisibilityChange={false}>
               <div className="flex justify-center">
-                  <button className="bg bg-gradient-to-r from-blue-500 to-blue-400 rounded-md px-12 py-2 font-bold text-white duration-200 hover:scale-125"
-                    onClick={openModal}>
+                  <button className="bg bg-gradient-to-r from-blue-500 to-blue-400 rounded-md px-12 py-2 font-bold text-white duration-200 hover:scale-125 text-xs"
+                    onClick={onOpen}
+                    >
                       Check Out My Gear
                   </button>
               </div>
@@ -249,40 +255,40 @@ export default function Home() {
           
             <div className="text-6xl flex justify-center gap-16 py-10 text-gray-600 dark:text-white ">
               
-                <ToolTip textSize="lg" tooltip={"Linkedin"}  ><a href="https://www.linkedin.com/in/chiedozie-ehileme-529b6a25b/" target="_blank" rel="noreferrer">
+                <ToolTip textSize="sm" tooltip={"Linkedin"}  ><a href="https://www.linkedin.com/in/chiedozie-ehileme-529b6a25b/" target="_blank" rel="noreferrer">
                     <Slide direction="left" cascade={true} damping={20}> 
-                      <AiFillLinkedin className="duration-300 hover:scale-125" />
+                      <AiFillLinkedin className="duration-300 hover:scale-125 " size={35} />
                     </Slide>
                   </a>
                 </ToolTip>
 
-                <ToolTip textSize="lg" tooltip={"GitHub"}  ><a href="https://github.com/Cephrius/" target="_blank" rel="noreferrer">
+                <ToolTip textSize="sm" tooltip={"GitHub"}  ><a href="https://github.com/Cephrius/" target="_blank" rel="noreferrer">
                   <Slide direction="left" cascade={true}>
-                    <AiFillGithub className="duration-300 hover:scale-125" />
+                    <AiFillGithub className="duration-300 hover:scale-125" size={35} />
                   </Slide>
                   </a>
                 </ToolTip>
-                <ToolTip textSize="lg" tooltip={"Instagram"}><a href="https://www.instagram.com/chiedozie.py/" target="_blank" rel="noreferrer" >
+                <ToolTip textSize="sm" tooltip={"Instagram"}><a href="https://www.instagram.com/chiedozie.py/" target="_blank" rel="noreferrer" >
                   <Slide direction="right" cascade={true}>
-                      <AiFillInstagram className="duration-300 hover:scale-125"/> 
+                      <AiFillInstagram className="duration-300 hover:scale-125" size={35}/> 
                   </Slide> 
                   </a> 
                 </ToolTip>
-                <ToolTip textSize="lg" tooltip={"Twitter"}><a href="https://twitter.com/CEhileme" target="_blank" rel="noreferrer">
+                <ToolTip textSize="sm" tooltip={"Twitter"}><a href="https://twitter.com/CEhileme" target="_blank" rel="noreferrer">
                   <Slide direction="right" cascade={true}>
-                    <AiFillTwitterCircle className="duration-300 hover:scale-125" />
+                    <AiFillTwitterCircle className="duration-300 hover:scale-125" size={35}/>
                   </Slide>
                   </a>
                 </ToolTip>
              
             </div>
           <Slide direction="up" triggerOnce onVisibilityChange={false}>
-            <div className="relative mx-auto bg-gradient-to-b from-blue-500 rounded-full w-80 h-80 mt-10 overflow-hidden md:h-96 md:w-96">
-              <Image src={headshot} objectFit="cover" alt="Headshot of Chiedozie Ehileme"/>
+            <div className="relative mx-auto bg-gradient-to-b from-blue-500 rounded-full w-[220px] h-[220px] mt-10 overflow-hidden ">
+              <Image src={headshot} objectFit="cover" alt="Headshot of Chiedozie Ehileme " />
             </div>
           </Slide>
           <Fade  delay={1000} triggerOnce onVisibilityChange={false}>
-            <div className= " relative mx-auto flex justify-center py-12 text-4xl animate-bounce-slow m-6 dark:text-white ">
+            <div className= " relative mx-auto flex justify-center py-10 text-4xl animate-bounce-slow m-6 dark:text-white ">
               <BsArrowDownCircle className="hover:cursor-pointer"
                   onClick={handleScrollToMiddle}
               />
@@ -291,7 +297,7 @@ export default function Home() {
          </section>
          
          <section>
-          <div >
+          <div className="">
             <h2 className="text-4xl py-10 text-center dark:text-white">About Me</h2>
             <p className="relative text-md py-2 leading-9 text-gray-800 text-center lg:mx-32 dark:text-white"  >
             Hey there! I'm Chiedozie, a Computer Science major hailing from Katy, Texas. Ever since I can remember, Ive had this burning passion for technology, especially when it comes to the world of development.
@@ -305,7 +311,7 @@ export default function Home() {
             </p>
             </p>
           </div>
-          <div className="lg:flex gap-28 justify-center ">
+          <div className="lg:flex gap-28 justify-center scale-90 ">
             <div class="text-center shadow-2xl p-10 rounded-xl my-10 border-black border-10 transition-all duration-400 hover:scale-110 " >
               <div className="flex justify-center items-center mb-6">
                 <Image src={design} width={100} height={100} alt="image for project block" />
