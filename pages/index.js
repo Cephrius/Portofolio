@@ -162,6 +162,7 @@ export default function Home() {
           <>
             <ModalHeader className="flex flex-col gap-1 mb-[-30px] text-2xl">My Gear</ModalHeader>
             <ModalHeader className="flex flex-col font-light "> Here is a list of the gear and tools that I use. </ModalHeader>
+            <h1 className="text-center">WORK IN PROGRESS</h1>
             <ModalBody className="py-6">
    
 
