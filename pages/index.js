@@ -115,7 +115,7 @@ export default function Home() {
 
   useEffect(() => {
     const darkModeData = localStorage.getItem("darkMode");
-    if (darkModeData !== null) {
+    if (darkModeData  !== undefined) {
       setDarkMode(JSON.parse(darkModeData));
     } else {
       // Check if the user prefers dark or light mode based on system setting
@@ -146,7 +146,7 @@ export default function Home() {
     
       <Head >
         <title>Chiedozie Ehileme | Computer Science Major </title>
-        <meta name="viewport" content="width=device-width, initial-scale=0.63"/>
+        <meta name="viewport" content="width=device-width"/>
         <link rel="icon" href="logo.jpg" />
       </Head>
 
@@ -172,7 +172,7 @@ export default function Home() {
     </Modal>
 
       {/* add fade in to dark mode feature */}
-      <main className={"bg-[#fffffc] px-10 md:px-20 lg:px-14 transition-all duration-700 dark:bg-gray-900  "}> 
+      <main className={"bg-[#fffffc] px-10 md:px-20 lg:px-14 transition-all duration-700  dark:bg-gray-900  "}> 
         
  
           <section className=" h-screen dark:dark-mode">
