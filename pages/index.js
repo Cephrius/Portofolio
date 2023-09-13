@@ -215,8 +215,8 @@ export default function Home() {
                           className="bg-gradient-to-b from-blue-500 to-blue-300 rounded-xl w-24 text-xs dark:text-white"
 
                         >                        
-                         <DropdownItem key="Light" onClick={(e) => { e.stopPropagation(); toggleLightMode(); }} className={` ${darkMode ? "text-white font-bold":""}`}>Light</DropdownItem>
-                        <DropdownItem key="Dark" onClick={(e) => { e.stopPropagation(); toggleDarkMode(); }} className={darkMode ? "text-white font-bold":""} >Dark</DropdownItem>
+                         <DropdownItem key="Light" onClick={(e) => { e.stopPropagation(); toggleLightMode(); }} className="font-bold text-white">Light</DropdownItem>
+                        <DropdownItem key="Dark" onClick={(e) => { e.stopPropagation(); toggleDarkMode(); }} className="font-bold text-white" >Dark</DropdownItem>
 
                         </DropdownMenu>
                       </Dropdown>
